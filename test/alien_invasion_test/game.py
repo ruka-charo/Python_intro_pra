@@ -19,7 +19,7 @@ class AlienInvasion:
         #self.settings.screen_width = self.screen.get_rect().width
         #self.settings.screen_height = self.screen.get_rect().height
 
-        pygame.display.set_caption('エイリアン侵略')
+        pygame.display.set_caption('エイリアン侵略(縦ver.)')
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -47,10 +47,10 @@ class AlienInvasion:
 
     def _check_keydown_events(self, event):
         '''キーを押すイベントに対応する。'''
-        if event.key == pygame.K_RIGHT:
-            self.ship.moving_right = True
-        elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = True
+        if event.key == pygame.K_UP:
+            self.ship.moving_top = True
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_bottom = True
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
         elif event.key == pygame.K_q:
@@ -59,10 +59,10 @@ class AlienInvasion:
 
     def _check_keyup_events(self, event):
         '''キーを離すイベントに対応する。'''
-        if event.key == pygame.K_RIGHT:
-            self.ship.moving_right = False
-        elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = False
+        if event.key == pygame.K_UP:
+            self.ship.moving_top = False
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_bottom = False
 
 
     def _fire_bullet(self):
@@ -79,9 +79,9 @@ class AlienInvasion:
 
         #見えなくなった弾を廃棄する。
         for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.left >= self.ship.screen_rect.right:
                 self.bullets.remove(bullet)
-                
+
 
     def _update_screen(self):
         '''画面上の画像を更新し、新しい画面に切り替える。'''
