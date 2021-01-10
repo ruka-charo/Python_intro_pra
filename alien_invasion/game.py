@@ -3,6 +3,7 @@ import  pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class AlienInvasion:
     '''ゲームのアセットと動作を管理する全体的なクラス'''
@@ -23,6 +24,9 @@ class AlienInvasion:
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
 
     def run_game(self):
@@ -81,7 +85,30 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-                
+
+
+    def _create_fleet(self):
+        '''エイリアンの艦隊を作成する。'''
+        #エイリアンを一匹作成し、一列のエイリアンの数を求める。
+        #各エイリアンの間には、エイリアン一匹分のスペースを空ける。
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_alien_x = available_space_x // (2 * alien_width)
+
+        #最初の列のエイリアンを作成する。
+        for alien_number in range(number_alien_x):
+            self._create_alien(alien_number)
+
+
+    def _create_alien(self, alien_number):
+        #エイリアンを一匹作成し、列の中に配置する。
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        alien.x = alien_width + (2 * alien_width * alien_number)
+        alien.rect.x = alien.x
+        self.aliens.add(alien)
+
 
     def _update_screen(self):
         '''画面上の画像を更新し、新しい画面に切り替える。'''
@@ -89,6 +116,7 @@ class AlienInvasion:
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
 
         pygame.display.flip()
 
