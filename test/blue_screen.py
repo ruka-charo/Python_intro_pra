@@ -38,7 +38,7 @@ class Charo:
         self.screen_rect = test.screen.get_rect()
 
         #画像の読み込み
-        self.image = pygame.image.load('images/charo_blue.bmp')
+        self.image = pygame.image.load('images/charo.bmp')
         self.rect = self.image.get_rect()
 
         #中央に配置
