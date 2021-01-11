@@ -8,7 +8,7 @@ class Alien(Sprite):
     def __init__(self, ai_game):
         '''エイリアンを初期化し、開始時の位置を設定する。'''
         super().__init__()
-        self.scerrn = ai_game.screen
+        self.screen = ai_game.screen
 
         #エイリアンの画像を読み込み、サイズを取得する。
         self.image = pygame.image.load('images/alien.bmp')
