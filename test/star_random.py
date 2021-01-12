@@ -30,12 +30,11 @@ class Window():
                 sys.exit()
 
 
-    def _star_create(self, num_x, num_y):
+    def _star_create(self):
         #星のサンプルを作成
         sample = Star(self)
-        sample_width, sample_height = sample.rect.size
-        sample.rect.x = sample_width + (2 * sample_width) * num_x
-        sample.rect.y = sample_height + (2 * sample_height) * num_y
+        sample.rect.x = 40 * random.randint(1, 30)
+        sample.rect.y = 40 * random.randint(1, 20)
 
         self.stars.add(sample)
 
@@ -43,15 +42,9 @@ class Window():
     def _stars_group_create(self):
         #星のグループを作成
         model = Star(self)
-        model_width, model_height = model.rect.size
-        available_space_x = self.settings.screen_width - (2 * model_width)
-        available_space_y = self.settings.screen_height - (2 * model_height)
-        star_num_x = available_space_x // (2 * model_width)
-        star_num_y = available_space_y // (2 * model_height)
 
-        for num_x in range(star_num_x):
-            for num_y in range(star_num_y):
-                self._star_create(num_x, num_y)
+        for i in range(50):
+            self._star_create()
 
 
     def _update_screen(self):

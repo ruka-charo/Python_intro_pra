@@ -35,6 +35,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
 
@@ -87,6 +88,15 @@ class AlienInvasion:
                 self.bullets.remove(bullet)
 
 
+    def _update_aliens(self):
+        '''
+        艦隊が画面の端にいるか確認してから、
+        艦隊にいる前エイリアンの位置を更新する。
+        '''
+        self._check_fleet_edges()
+        self.aliens.update()
+
+
     def _create_fleet(self):
         '''エイリアンの艦隊を作成する。'''
         #エイリアンを一匹作成し、一列のエイリアンの数を求める。
@@ -117,6 +127,21 @@ class AlienInvasion:
         alien.y = alien_height + (2 * alien_height * row_number)
         alien.rect.y = alien.y
         self.aliens.add(alien)
+
+
+    def _check_fleet_edges(self):
+        '''エイリアンが画面の端に達した場合、適切な処理を行う。'''
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+
+    def _change_fleet_direction(self):
+        '''艦隊を下に移動し、横移動の方向を変更する。'''
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
 
     def _update_screen(self):
