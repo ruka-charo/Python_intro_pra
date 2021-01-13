@@ -87,6 +87,21 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+        self._check_bullet_alien_collision()
+
+
+    def _check_bullet_alien_collision(self):
+        #弾とエイリアンの衝突に対応する。
+        #その場合は大正の弾とエイリアンを廃棄する。
+        collisions = pygame.sprite.groupcollide(
+        self.bullets, self.aliens, True, True)
+
+        if not self.aliens:
+            #存在する弾を破壊し、新しい艦隊を作成する。
+            self.bullets.empty()
+            self._create_fleet()
+
+
 
     def _update_aliens(self):
         '''
@@ -95,6 +110,10 @@ class AlienInvasion:
         '''
         self._check_fleet_edges()
         self.aliens.update()
+
+        #エイリアンと宇宙船の衝突を探す。
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print('宇宙船にぶつかった。')
 
 
     def _create_fleet(self):

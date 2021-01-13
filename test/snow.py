@@ -31,26 +31,19 @@ class Window():
                 sys.exit()
 
 
-    def _snow_create(self, num_x):
+    def _snow_create(self):
         #雪のサンプルを作成
         sample = Snow(self)
-        sample_width, sample_height = sample.rect.size
-        sample.rect.x = sample_width + (2 * sample_width) * num_x
+        sample.rect.x = 40 * random.randint(1, 30)
+        sample.rect.y = 40 * random.randint(1, 20)
 
         self.snows.add(sample)
 
 
     def _snows_group_create(self):
         #雪のグループを作成
-        model = Snow(self)
-        model_width, model_height = model.rect.size
-        available_space_x = self.settings.screen_width - (2 * model_width)
-        available_space_y = self.settings.screen_height - (2 * model_height)
-        snow_num_x = available_space_x // (2 * model_width)
-        snow_num_y = available_space_y // (2 * model_height)
-
-        for num_x in range(snow_num_x):
-            self._snow_create(num_x)
+        for i in range(50):
+            self._snow_create()
 
 
     def _update_snow(self):
@@ -58,6 +51,8 @@ class Window():
             snow.y = float(snow.rect.y)
             snow.y += self.settings.snow_speed
             snow.rect.y = snow.y
+            if snow.rect.y >= self.settings.screen_height - 100:
+                snow.rect.y = 0
 
 
     def _update_screen(self):
