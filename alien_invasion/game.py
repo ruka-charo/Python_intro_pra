@@ -1,6 +1,8 @@
 import sys
+from time import sleep
 import  pygame
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -22,6 +24,9 @@ class AlienInvasion:
 
         pygame.display.set_caption('エイリアン侵略')
 
+        #ゲームの統計情報を格納するインスタンスを生成する。
+        self.stats = GameStats(self)
+
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
@@ -33,9 +38,12 @@ class AlienInvasion:
         '''ゲームのメインループを開始する。'''
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.stats.game_active == True:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
 
 
@@ -113,7 +121,41 @@ class AlienInvasion:
 
         #エイリアンと宇宙船の衝突を探す。
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print('宇宙船にぶつかった。')
+            self._ship_hit()
+
+        #画面の一番下に到達したエイリアンを探す。
+        self._check_aliens_bottom()
+
+
+    def _ship_hit(self):
+        '''エイリアンと宇宙船の衝突に対応する。'''
+        #残りの宇宙船の数を減らす。
+        if self.stats.ships_left > 0:
+            self.stats.ships_left -= 1
+
+            #残ったエイリアンと弾を破棄する。
+            self.aliens.empty()
+            self.bullets.empty()
+
+            #新しい艦隊を生成し、宇宙船を中央に配置する。
+            self._create_fleet()
+            self.ship.center_ship()
+
+            #一時停止する。
+            sleep(0.5)
+
+        else:
+            self.stats.game_active = False
+
+
+    def _check_aliens_bottom(self):
+        '''エイリアンが画面の一番下に到達したかを確認する。'''
+        screen_rect = self.screen.get_rect()
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= screen_rect.bottom:
+                #宇宙船を破壊した時と同じように扱う。
+                self._ship_hit()
+                break
 
 
     def _create_fleet(self):
