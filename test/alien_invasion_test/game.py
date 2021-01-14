@@ -26,8 +26,8 @@ class AlienInvasion:
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
 
-        self.alien = Alien(self)
         self.aliens = pygame.sprite.Group()
+        self._create_aliens()
 
 
     def run_game(self):
@@ -70,8 +70,27 @@ class AlienInvasion:
             self.ship.moving_bottom = False
 
 
-    def create_alien(self):
-        '''エイリアンの作成'''
+    def _create_aliens(self):
+        '''エイリアン艦隊の作成'''
+        #作成範囲の計算
+        alien = Alien(self)
+        alien_width, alien_height = alien.rect.size
+        available_x = self.settings.screen_width - (
+        2 * self.ship.rect.x + alien_width)
+        available_y = self.settings.screen_height - (
+        2 * alien_height)
+
+        alien_num_x = available_x // (2 * alien_width)
+        alien_num_y = available_y // (2 * alien_height)
+
+        #艦隊の作成
+        for i in range(alien_num_x):
+            for k in range(alien_num_y):
+                alien.rect.x = (self.settings.screen_width -
+                (alien_width) * i)
+                alien.rect.y = alien_height * (2 * k - 1)
+                self.aliens.add(alien)
+
 
 
     def _fire_bullet(self):
@@ -99,7 +118,7 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
 
-        self.alien.blitme()
+        self.aliens.draw(self.screen)
 
         pygame.display.flip()
 
