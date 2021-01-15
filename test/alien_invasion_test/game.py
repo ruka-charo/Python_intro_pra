@@ -78,7 +78,7 @@ class AlienInvasion:
 
         alien_width, alien_height = alien.rect.size
         available_x = self.settings.screen_width - (
-        4 * self.ship.rect.width + alien_width)
+        6 * self.ship.rect.width + 2 * alien_width)
         available_y = self.settings.screen_height - (
         2 * alien_height)
 
@@ -96,8 +96,8 @@ class AlienInvasion:
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
 
-        alien.rect.x = (self.settings.screen_width -
-        (2 * alien_width) * i)
+        alien.rect.x = (self.settings.screen_width - alien_width
+        - (2 * alien_width) * i)
         alien.rect.y = alien_height * (2 * k + 1)
 
         self.aliens.add(alien)
@@ -106,18 +106,24 @@ class AlienInvasion:
     def _change_direction(self):
         for alien in self.aliens.sprites():
             if (alien.rect.y + alien.rect.height) >= self.settings.screen_height:
-                alien._alien_closer()
                 self.settings.aliens_direction = -1
+                self._aliens_closer()
+
             elif alien.rect.y <= 0:
-                alien._alien_closer()
                 self.settings.aliens_direction = 1
+                self._aliens_closer()
+
+
+    def _aliens_closer(self):
+        for alien in self.aliens.sprites():
+            alien._alien_closer()
 
 
     def _update_aliens(self):
         '''エイリアンを動かす'''
 
-        self._change_direction()
         self.aliens.update()
+        self._change_direction()
 
 
 
