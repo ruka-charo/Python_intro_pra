@@ -36,6 +36,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
 
@@ -74,9 +75,10 @@ class AlienInvasion:
         '''エイリアン艦隊の作成'''
         #作成範囲の計算
         alien = Alien(self)
+
         alien_width, alien_height = alien.rect.size
         available_x = self.settings.screen_width - (
-        2 * self.ship.rect.x + alien_width)
+        4 * self.ship.rect.width + alien_width)
         available_y = self.settings.screen_height - (
         2 * alien_height)
 
@@ -86,10 +88,36 @@ class AlienInvasion:
         #艦隊の作成
         for i in range(alien_num_x):
             for k in range(alien_num_y):
-                alien.rect.x = (self.settings.screen_width -
-                (alien_width) * i)
-                alien.rect.y = alien_height * (2 * k - 1)
-                self.aliens.add(alien)
+                self._assign_aliens(i, k)
+
+
+    def _assign_aliens(self, i, k):
+        '''エイリアン艦隊の作成の続き'''
+        alien = Alien(self)
+        alien_width, alien_height = alien.rect.size
+
+        alien.rect.x = (self.settings.screen_width -
+        (2 * alien_width) * i)
+        alien.rect.y = alien_height * (2 * k + 1)
+
+        self.aliens.add(alien)
+
+
+    def _change_direction(self):
+        for alien in self.aliens.sprites():
+            if (alien.rect.y + alien.rect.height) >= self.settings.screen_height:
+                alien._alien_closer()
+                self.settings.aliens_direction = -1
+            elif alien.rect.y <= 0:
+                alien._alien_closer()
+                self.settings.aliens_direction = 1
+
+
+    def _update_aliens(self):
+        '''エイリアンを動かす'''
+
+        self._change_direction()
+        self.aliens.update()
 
 
 

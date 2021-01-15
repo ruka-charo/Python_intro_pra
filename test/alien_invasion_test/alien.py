@@ -11,7 +11,19 @@ class Alien(Sprite):
         #エイリアンの画像を読み込み、表示準備をする。
         self.image = pygame.image.load('images/alien.bmp')
         self.rect = self.image.get_rect()
-        self.rect.midright = self.screen_rect.midright
+        self.rect.x = self.settings.screen_width - self.rect.width
+        self.rect.y = self.rect.height
+
+
+    def update(self):
+        '''エイリアンを動かす'''
+        self.rect.y += (self.settings.aliens_speed *
+                        self.settings.aliens_direction)
+
+
+    def _alien_closer(self):
+        '''エイリアンを動かす　その２'''
+        self.rect.x -= self.settings.aliens_close_speed
 
 
     def blitme(self):
