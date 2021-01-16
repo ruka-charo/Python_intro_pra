@@ -1,9 +1,11 @@
 import sys
 import  pygame
+from time import sleep
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from game_stats import GameStats
 
 
 class AlienInvasion:
@@ -29,14 +31,21 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
         self._create_aliens()
 
+        self.stats = GameStats(self)
+
+        print('宇宙船の残機：', self.stats.ship_left)
+
 
     def run_game(self):
         '''ゲームのメインループを開始する。'''
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.stats.game_active == True:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
 
 
@@ -104,27 +113,56 @@ class AlienInvasion:
 
 
     def _change_direction(self):
+        '''エイリアンの移動　その1'''
         for alien in self.aliens.sprites():
-            if (alien.rect.y + alien.rect.height) >= self.settings.screen_height:
+            if alien.rect.bottom >= self.settings.screen_height:
                 self.settings.aliens_direction = -1
                 self._aliens_closer()
 
-            elif alien.rect.y <= 0:
+            elif alien.rect.top <= 0:
                 self.settings.aliens_direction = 1
                 self._aliens_closer()
 
 
     def _aliens_closer(self):
+        '''エイリアンの移動　その2'''
         for alien in self.aliens.sprites():
             alien._alien_closer()
 
 
+    def _aliens_advance(self):
+        '''エイリアンが左端に到達した時の挙動'''
+        for alien in self.aliens.sprites():
+            if alien.rect.left <= 0:
+                self.aliens_ship_collision()
+                break
+
+
+    def aliens_ship_collision(self):
+        if self.stats.ship_left >= 1:
+            #機体残数を減らし、画面にあるものを一旦全て削除する。
+            self.stats.ship_left -= 1
+            print('宇宙船の残機：', self.stats.ship_left)
+            self.aliens.empty()
+            self.bullets.empty()
+            #船とエイリアンを再構築する。
+            self._create_aliens()
+            self.ship._assign_ship_center()
+            #衝突時に一時停止
+            sleep(0.5)
+
+        else:
+            self.stats.game_active = False
+
+
     def _update_aliens(self):
-        '''エイリアンを動かす'''
+        '''エイリアン関係の更新'''
 
         self.aliens.update()
         self._change_direction()
-
+        self._aliens_advance()
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            self.aliens_ship_collision()
 
 
     def _fire_bullet(self):
@@ -143,6 +181,20 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.left >= self.ship.screen_rect.right:
                 self.bullets.remove(bullet)
+
+        self._check_aliens_bullets_collision()
+
+
+    def _check_aliens_bullets_collision(self):
+        #弾がエイリアンに当たったかを調べる
+        #その場合は対象の弾とエイリアンを廃棄する。
+        collisions = pygame.sprite.groupcollide(
+                    self.bullets, self.aliens, True, True)
+
+        if not self.aliens:
+            #存在する弾を破壊し、新しい艦隊を作成する。
+            self.bullets.empty()
+            self._create_aliens()
 
 
     def _update_screen(self):

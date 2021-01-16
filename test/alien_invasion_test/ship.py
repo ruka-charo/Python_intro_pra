@@ -23,6 +23,13 @@ class Ship:
         self.moving_top = False
         self.moving_bottom = False
 
+
+    def _assign_ship_center(self):
+        #画面左側中央に配置
+        self.rect.midleft = self.screen_rect.midleft
+        self.y = float(self.rect.y)
+
+
     def update(self):
         '''移動フラグによって宇宙船の位置を更新する。'''
         #宇宙船のyの値を更新する(rectではない)。
@@ -33,6 +40,7 @@ class Ship:
 
         #self.yからrectオブジェクトの位置を更新する。
         self.rect.y = self.y
+
 
     def blitme(self):
         '''宇宙船を現在位置に描画する。'''
