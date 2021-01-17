@@ -3,6 +3,7 @@ from time import sleep
 import  pygame
 from settings import Settings
 from game_stats import GameStats
+from button import Button
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -33,6 +34,9 @@ class AlienInvasion:
 
         self._create_fleet()
 
+        #Playボタンを作成する。
+        self.play_button = Button(self, 'Play')
+
 
     def run_game(self):
         '''ゲームのメインループを開始する。'''
@@ -56,6 +60,9 @@ class AlienInvasion:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
 
 
     def _check_keydown_events(self, event):
@@ -66,6 +73,8 @@ class AlienInvasion:
             self.ship.moving_left = True
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key == pygame.K_p:
+            self._start_game()
         elif event.key == pygame.K_q:
             sys.exit()
 
@@ -76,6 +85,31 @@ class AlienInvasion:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+
+
+    def _check_play_button(self, mouse_pos):
+        '''プレイヤーが「Play」ボタンをクリックしたら新規ゲームを開始する。'''
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+
+        if button_clicked and self.stats.game_active == False:
+            self._start_game()
+
+
+    def _start_game(self):
+        #ゲームの統計情報をリセットする。
+        self.stats.reset_stats()
+        self.stats.game_active = True
+
+        #残ったエイリアンと弾を破棄する・
+        self.aliens.empty()
+        self.bullets.empty()
+
+        #新しい艦隊を作成し、宇宙船を中央に配置する。
+        self._create_fleet()
+        self.ship.center_ship()
+
+        #マウスカーソルを非表示にする。
+        pygame.mouse.set_visible(False)
 
 
     def _fire_bullet(self):
@@ -100,7 +134,7 @@ class AlienInvasion:
 
     def _check_bullet_alien_collision(self):
         #弾とエイリアンの衝突に対応する。
-        #その場合は大正の弾とエイリアンを廃棄する。
+        #その場合は対象の弾とエイリアンを廃棄する。
         collisions = pygame.sprite.groupcollide(
         self.bullets, self.aliens, True, True)
 
@@ -146,6 +180,7 @@ class AlienInvasion:
 
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
 
     def _check_aliens_bottom(self):
@@ -212,6 +247,10 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        #ゲームが非アクティブ状態の時に「Play」ボタンを描画する。
+        if self.stats.game_active == False:
+            self.play_button.draw_button()
 
         pygame.display.flip()
 

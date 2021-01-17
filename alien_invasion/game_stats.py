@@ -5,8 +5,8 @@ class GameStats:
         self.settings = ai_game.settings
         self.reset_stats()
 
-        #エイリアン侵略ゲームをアクティブな状態で開始する。
-        self.game_active = True
+        #エイリアン侵略ゲームを非アクティブな状態で開始する。
+        self.game_active = False
 
 
     def reset_stats(self):
