@@ -93,6 +93,7 @@ class AlienInvasion:
 
         if button_clicked and self.stats.game_active == False:
             self._start_game()
+            self.settings.initialize_dynamic_settings()
 
 
     def _start_game(self):
@@ -142,6 +143,7 @@ class AlienInvasion:
             #存在する弾を破壊し、新しい艦隊を作成する。
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
 
 
