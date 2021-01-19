@@ -5,7 +5,7 @@ class Settings:
         '''ゲームの固定の設定値を初期化する。'''
         #画面に関する設定
         self.screen_width = 1200
-        self.screen_height = 800
+        self.screen_height = 700
         self.bg_color = (230, 230, 230)
 
         #宇宙船の設定

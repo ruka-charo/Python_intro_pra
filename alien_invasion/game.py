@@ -34,8 +34,10 @@ class AlienInvasion:
 
         self._create_fleet()
 
-        #Playボタンを作成する。
-        self.play_button = Button(self, 'Play')
+        #難易度ボタンを作成する。
+        self.easy_button = Button(self, 'easy')
+        self.normal_button = Button(self, 'normal')
+        self.difficult_button = Button(self, 'difficult')
 
 
     def run_game(self):
@@ -88,10 +90,23 @@ class AlienInvasion:
 
 
     def _check_play_button(self, mouse_pos):
-        '''プレイヤーが「Play」ボタンをクリックしたら新規ゲームを開始する。'''
-        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        '''プレイヤーがボタンをクリックしたら新規ゲームを開始する。'''
+        easy_clicked = self.easy_button.rect.collidepoint(mouse_pos)
+        normal_clicked = self.normal_button.rect.collidepoint(mouse_pos)
+        difficult_clicked = self.difficult_button.rect.collidepoint(mouse_pos)
 
-        if button_clicked and self.stats.game_active == False:
+
+        if easy_clicked and self.stats.game_active == False:
+            self._first_action()
+        elif normal_clicked and self.stats.game_active == False:
+            self._first_action()
+            self.settings.speedup_scale = 1.2
+        elif difficult_clicked and self.stats.game_active == False:
+            self._first_action()
+            self.settings.speedup_scale = 1.3
+
+
+    def _first_action(self):
             self._start_game()
             self.settings.initialize_dynamic_settings()
 
@@ -137,7 +152,7 @@ class AlienInvasion:
         #弾とエイリアンの衝突に対応する。
         #その場合は対象の弾とエイリアンを廃棄する。
         collisions = pygame.sprite.groupcollide(
-        self.bullets, self.aliens, True, True)
+        self.bullets, self.aliens, False, True)
 
         if not self.aliens:
             #存在する弾を破壊し、新しい艦隊を作成する。
@@ -252,7 +267,9 @@ class AlienInvasion:
 
         #ゲームが非アクティブ状態の時に「Play」ボタンを描画する。
         if self.stats.game_active == False:
-            self.play_button.draw_button()
+            self.easy_button.draw_button()
+            self.normal_button.draw_button()
+            self.difficult_button.draw_button()
 
         pygame.display.flip()
 
