@@ -3,6 +3,7 @@ from time import sleep
 import  pygame
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
 from bullet import Bullet
@@ -27,6 +28,7 @@ class AlienInvasion:
 
         #ゲームの統計情報を格納するインスタンスを生成する。
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -115,6 +117,7 @@ class AlienInvasion:
         #ゲームの統計情報をリセットする。
         self.stats.reset_stats()
         self.stats.game_active = True
+        self.sb.prep_score()
 
         #残ったエイリアンと弾を破棄する・
         self.aliens.empty()
@@ -145,14 +148,20 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
-        self._check_bullet_alien_collision()
+        self._check_bullet_alien_collisions()
 
 
-    def _check_bullet_alien_collision(self):
+    def _check_bullet_alien_collisions(self):
         #弾とエイリアンの衝突に対応する。
         #その場合は対象の弾とエイリアンを廃棄する。
         collisions = pygame.sprite.groupcollide(
         self.bullets, self.aliens, False, True)
+
+        if collisions:
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
+            self.sb.prep_score()
+            self.sb.check_high_score()
 
         if not self.aliens:
             #存在する弾を破壊し、新しい艦隊を作成する。
@@ -264,6 +273,9 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        #得点の情報を描画する。
+        self.sb.show_score()
 
         #ゲームが非アクティブ状態の時に「Play」ボタンを描画する。
         if self.stats.game_active == False:
