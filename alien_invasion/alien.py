@@ -10,7 +10,11 @@ class Alien(Sprite):
         super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
+        self._make_aliens()
 
+
+
+    def _make_aliens(self):
         #エイリアンの画像を読み込み、サイズを取得する。
         self.image = pygame.image.load('images/alien.bmp')
         self.rect = self.image.get_rect()

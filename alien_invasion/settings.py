@@ -25,6 +25,11 @@ class Settings:
         #エイリアンの点数が増加する量
         self.score_scale = 1.5
 
+        #ゲーム難易度の選択について
+        self.easy_mode = False
+        self.normal_mode = False
+        self.difficult_mode = False
+
         self.initialize_dynamic_settings()
 
 

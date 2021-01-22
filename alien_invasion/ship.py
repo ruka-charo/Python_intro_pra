@@ -10,7 +10,13 @@ class Ship(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
+        self._make_ship(ai_game)
 
+        #移動フラグ
+        self.moving_right = False
+        self.moving_left = False
+
+    def _make_ship(self, ai_game):
         #宇宙船の画像を読み込み、サイズを取得する。
         self.image = pygame.image.load('images/ship.bmp')
         self.rect = self.image.get_rect()
@@ -20,10 +26,6 @@ class Ship(Sprite):
 
         #宇宙船の水平位置の浮動小数点数を格納する。
         self.x = float(self.rect.x)
-
-        #移動フラグ
-        self.moving_right = False
-        self.moving_left = False
 
     def update(self):
         '''移動フラグによって宇宙船の位置を更新する。'''

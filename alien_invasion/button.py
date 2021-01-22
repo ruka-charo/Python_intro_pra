@@ -9,12 +9,22 @@ class Button:
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
 
+        self._button_settings()
+        self._make_button_rect(ai_game, msg)
+
+        #ボタンのメッセージは一度だけ準備する必要がある。
+        self._prep_msg(msg)
+
+
+    def _button_settings(self):
         #ボタンの大きさと属性を設定する。
         self.width, self.height = 200, 50
         self.button_color = (0, 255, 0)
         self.text_color = (255, 255, 255)
         self.font = pygame.font.SysFont(None, 48)
 
+
+    def _make_button_rect(self, ai_game, msg):
         #ボタンのrectオブジェクトを生成し、画面に配置する。
         self.rect = pygame.Rect(0, 0, self.width, self.height)
 
@@ -24,9 +34,6 @@ class Button:
             self.rect.center = self.screen_rect.center
         elif msg == 'difficult':
             self.rect.midbottom = self.screen_rect.midbottom
-
-        #ボタンのメッセージは一度だけ準備する必要がある。
-        self._prep_msg(msg)
 
 
     def _prep_msg(self, msg):

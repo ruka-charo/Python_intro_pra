@@ -23,20 +23,26 @@ class AlienInvasion:
         #self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         #self.settings.screen_width = self.screen.get_rect().width
         #self.settings.screen_height = self.screen.get_rect().height
-
         pygame.display.set_caption('エイリアン侵略')
 
         #ゲームの統計情報を格納するインスタンスを生成する。
-        self.stats = GameStats(self)
-        self.sb = Scoreboard(self)
-
-        self.ship = Ship(self)
-        self.bullets = pygame.sprite.Group()
-        self.aliens = pygame.sprite.Group()
+        self._make_instance()
 
         self._create_fleet()
 
         #難易度ボタンを作成する。
+        self._make_button()
+
+
+    def _make_instance(self):
+        self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
+        self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+
+    def _make_button(self):
         self.easy_button = Button(self, 'easy')
         self.normal_button = Button(self, 'normal')
         self.difficult_button = Button(self, 'difficult')
@@ -59,6 +65,7 @@ class AlienInvasion:
         '''キーボードとマウスのイベントを監視する。'''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self._record_high_score()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_events(event)
@@ -80,6 +87,7 @@ class AlienInvasion:
         elif event.key == pygame.K_p:
             self._start_game()
         elif event.key == pygame.K_q:
+            self._record_high_score()
             sys.exit()
 
 
@@ -90,6 +98,23 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    def _record_high_score(self):
+        '''ハイスコアを記録する。'''
+        if self.settings.easy_mode == True:
+            self.settings.easy_mode = False
+            with open('Easy_High_Score.txt', 'w') as f:
+                f.write(str(self.stats.high_score))
+
+        elif self.settings.normal_mode == True:
+            self.settings.normal_mode = False
+            with open('Normal_High_Score.txt', 'w') as f:
+                f.write(str(self.stats.high_score))
+
+        elif self.settings.difficult_mode == True:
+            self.settings.difficult_mode = False
+            with open('Difficult_High_Score.txt', 'w') as f:
+                f.write(str(self.stats.high_score))
+
 
     def _check_play_button(self, mouse_pos):
         '''プレイヤーがボタンをクリックしたら新規ゲームを開始する。'''
@@ -99,13 +124,42 @@ class AlienInvasion:
 
 
         if easy_clicked and self.stats.game_active == False:
+            self._start_easy()
             self._first_action()
+
         elif normal_clicked and self.stats.game_active == False:
+            self._start_normal()
             self._first_action()
-            self.settings.speedup_scale = 1.2
+
         elif difficult_clicked and self.stats.game_active == False:
+            self._start_difficult()
             self._first_action()
-            self.settings.speedup_scale = 1.3
+
+
+    def _start_easy(self):
+        #ハイスコアを読み込む
+        with open('Easy_High_Score.txt', 'r') as f:
+            self.stats.high_score = int(f.readline())
+        self.sb.prep_high_score()
+        self.settings.easy_mode = True
+
+
+    def _start_normal(self):
+        #ハイスコアを読み込む
+        with open('Normal_High_Score.txt', 'r') as f:
+            self.stats.high_score = int(f.readline())
+        self.sb.prep_high_score()
+        self.settings.normal_mode = True
+        self.settings.speedup_scale = 1.2
+
+
+    def _start_difficult(self):
+        #ハイスコアを読み込む
+        with open('Difficult_High_Score.txt', 'r') as f:
+            self.stats.high_score = int(f.readline())
+        self.sb.prep_high_score()
+        self.settings.difficult_mode = True
+        self.settings.speedup_scale = 1.3
 
 
     def _first_action(self):
@@ -166,14 +220,19 @@ class AlienInvasion:
             self.sb.check_high_score()
 
         if not self.aliens:
-            #存在する弾を破壊し、新しい艦隊を作成する。
-            self.bullets.empty()
-            self._create_fleet()
-            self.settings.increase_speed()
+            #艦隊を全滅させた時の処理
+            self._start_new_level()
 
-            #レベルを増やす。
-            self.stats.level += 1
-            self.sb.prep_level()
+
+    def _start_new_level(self):
+        #存在する弾を破壊し、新しい艦隊を作成する。
+        self.bullets.empty()
+        self._create_fleet()
+        self.settings.increase_speed()
+
+        #レベルを増やす。
+        self.stats.level += 1
+        self.sb.prep_level()
 
 
 

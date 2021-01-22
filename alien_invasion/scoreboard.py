@@ -12,7 +12,11 @@ class Scoreboard:
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
         self.stats = ai_game.stats
+        self._sb_settings()
 
+
+
+    def _sb_settings(self):
         #得点表示用のフォントを設定する。
         self.text_color = (30, 30, 30)
         self.font = pygame.font.SysFont(None, 48)
@@ -22,6 +26,7 @@ class Scoreboard:
         self.prep_high_score()
         self.prep_level()
         self.prep_ships()
+
 
     def prep_score(self):
         '''得点を描画用の画像に変換する。'''
@@ -76,6 +81,7 @@ class Scoreboard:
         if self.stats.score >= self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
+
 
     def show_score(self):
         '''画面に得点を描画する。'''
