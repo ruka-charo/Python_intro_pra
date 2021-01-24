@@ -17,7 +17,7 @@ ax.set_ylabel('Square of Value', fontsize=14)
 ax.axis([0, 1100, 0, 1100000])
 
 #メモリラベルのサイズを設定する。
-ax.tick_params(axis='both',which='major', labelsize=14)
+ax.tick_params(axis='both', which='major', labelsize=14)
 
 plt.show()
 #グラフの保存
