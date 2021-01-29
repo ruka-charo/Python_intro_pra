@@ -7,17 +7,26 @@ filename = '/Users/rukaoide/Library/Mobile Documents/\
 com~apple~CloudDocs/Documents/Python/Python_intro_pra/\
 data/data_sample/San_Francisco.csv'
 
+
 with open(filename) as f:
     reader = csv.reader(f)
     header_row = next(reader)
+
+    for index, row in enumerate(header_row):
+        if row == 'DATE':
+            index_date = index
+        elif row == 'TMAX':
+            index_tmax = index
+        elif row == 'TMIN':
+            index_tmin = index
 
     #ファイルから日付、最高気温、最低気温を抜き出す。
     days, max_t, min_t = [], [], []
 
     for row in reader:
-        day = datetime.strptime(row[2], '%Y-%m-%d')
-        max = int(row[4])
-        min = int(row[5])
+        day = datetime.strptime(row[index_date], '%Y-%m-%d')
+        max = int(row[index_tmax])
+        min = int(row[index_tmin])
         days.append(day)
         max_t.append(max)
         min_t.append(min)
