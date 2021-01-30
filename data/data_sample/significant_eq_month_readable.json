@@ -1,0 +1,461 @@
+{
+    "type": "FeatureCollection",
+    "metadata": {
+        "generated": 1611972474000,
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson",
+        "title": "USGS Significant Earthquakes, Past Month",
+        "status": 200,
+        "api": "1.10.3",
+        "count": 11
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 5.8,
+                "place": "35 km ENE of Villa Presidente Frei, \u00d1u\u00f1oa, Santiago, Chile, Chile",
+                "time": 1611446865009,
+                "updated": 1611867265870,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000d2s4",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000d2s4.geojson",
+                "felt": 349,
+                "cdi": 5.4,
+                "mmi": 4.389,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 0,
+                "sig": 706,
+                "net": "us",
+                "code": "7000d2s4",
+                "ids": ",us7000d2s4,",
+                "sources": ",us,",
+                "types": ",dyfi,losspager,origin,phase-data,shakemap,",
+                "nst": null,
+                "dmin": 0.086,
+                "rms": 1.05,
+                "gap": 26,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 5.8 - 35 km ENE of Villa Presidente Frei, \u00d1u\u00f1oa, Santiago, Chile, Chile"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -70.2208,
+                    -33.3594,
+                    110.82
+                ]
+            },
+            "id": "us7000d2s4"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 6.9,
+                "place": "South Shetland Islands",
+                "time": 1611445010808,
+                "updated": 1611564931875,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000d2rx",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000d2rx.geojson",
+                "felt": 8,
+                "cdi": 8.7,
+                "mmi": 5.184,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 1,
+                "sig": 739,
+                "net": "us",
+                "code": "7000d2rx",
+                "ids": ",us7000d2rx,at00qneuxj,pt21023003,",
+                "sources": ",us,at,pt,",
+                "types": ",dyfi,impact-link,losspager,moment-tensor,origin,phase-data,shakemap,",
+                "nst": null,
+                "dmin": 1.55,
+                "rms": 0.61,
+                "gap": 19,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 6.9 - South Shetland Islands"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -55.4937,
+                    -61.825,
+                    9.58
+                ]
+            },
+            "id": "us7000d2rx"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 7,
+                "place": "210 km SE of Pondaguitan, Philippines",
+                "time": 1611231785774,
+                "updated": 1611529072349,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000d20e",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000d20e.geojson",
+                "felt": 85,
+                "cdi": 6.4,
+                "mmi": 5.458,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 1,
+                "sig": 808,
+                "net": "us",
+                "code": "7000d20e",
+                "ids": ",pt21021050,at00qnaaek,us7000d20e,",
+                "sources": ",pt,at,us,",
+                "types": ",dyfi,general-text,ground-failure,impact-link,losspager,moment-tensor,origin,phase-data,shakemap,",
+                "nst": null,
+                "dmin": 2.813,
+                "rms": 0.82,
+                "gap": 28,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 7.0 - 210 km SE of Pondaguitan, Philippines"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    127.5174,
+                    5.0074,
+                    95.81
+                ]
+            },
+            "id": "us7000d20e"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 6.4,
+                "place": "27 km SW of Pocito, Argentina",
+                "time": 1611024382380,
+                "updated": 1611634604654,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000d18q",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000d18q.geojson",
+                "felt": 768,
+                "cdi": 6.2,
+                "mmi": 7.157,
+                "alert": "yellow",
+                "status": "reviewed",
+                "tsunami": 1,
+                "sig": 1126,
+                "net": "us",
+                "code": "7000d18q",
+                "ids": ",at00qn5ud7,pt21019000,us7000d18q,",
+                "sources": ",at,pt,us,",
+                "types": ",dyfi,ground-failure,impact-link,impact-text,losspager,moment-tensor,origin,phase-data,shakemap,",
+                "nst": null,
+                "dmin": 0.299,
+                "rms": 0.99,
+                "gap": 21,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 6.4 - 27 km SW of Pocito, Argentina"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -68.8182,
+                    -31.8232,
+                    20
+                ]
+            },
+            "id": "us7000d18q"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 4.2,
+                "place": "4km SE of Aromas, CA",
+                "time": 1610856087110,
+                "updated": 1611850827069,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73512355",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73512355.geojson",
+                "felt": 19900,
+                "cdi": 4.6,
+                "mmi": 6.03,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 1,
+                "sig": 731,
+                "net": "nc",
+                "code": "73512355",
+                "ids": ",ew1610856087,at00qn28id,nc73512355,us7000d0sg,",
+                "sources": ",ew,at,nc,us,",
+                "types": ",dyfi,focal-mechanism,impact-link,losspager,moment-tensor,nearby-cities,origin,phase-data,scitech-link,shake-alert,shakemap,",
+                "nst": 153,
+                "dmin": 0.03114,
+                "rms": 0.14,
+                "gap": 27,
+                "magType": "mw",
+                "type": "earthquake",
+                "title": "M 4.2 - 4km SE of Aromas, CA"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -121.6105,
+                    36.8673333,
+                    8.32
+                ]
+            },
+            "id": "nc73512355"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 5.5,
+                "place": "50 km NE of Bandar-e Lengeh, Iran",
+                "time": 1610746264610,
+                "updated": 1610832927727,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000d0gn",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000d0gn.geojson",
+                "felt": 41,
+                "cdi": 4.9,
+                "mmi": 6.933,
+                "alert": "yellow",
+                "status": "reviewed",
+                "tsunami": 0,
+                "sig": 670,
+                "net": "us",
+                "code": "7000d0gn",
+                "ids": ",us7000d0gn,",
+                "sources": ",us,",
+                "types": ",dyfi,losspager,moment-tensor,origin,phase-data,shakemap,",
+                "nst": null,
+                "dmin": 2.175,
+                "rms": 1.07,
+                "gap": 35,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 5.5 - 50 km NE of Bandar-e Lengeh, Iran"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    55.1859,
+                    26.9258,
+                    8
+                ]
+            },
+            "id": "us7000d0gn"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 3.63,
+                "place": "2km W of Concord, CA",
+                "time": 1610651890680,
+                "updated": 1611926224182,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73510910",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73510910.geojson",
+                "felt": 5099,
+                "cdi": 4.3,
+                "mmi": 4.28,
+                "alert": null,
+                "status": "reviewed",
+                "tsunami": 0,
+                "sig": 633,
+                "net": "nc",
+                "code": "73510910",
+                "ids": ",nc73510910,us7000d03i,",
+                "sources": ",nc,us,",
+                "types": ",dyfi,focal-mechanism,moment-tensor,nearby-cities,origin,phase-data,scitech-link,shakemap,",
+                "nst": 199,
+                "dmin": 0.002813,
+                "rms": 0.19,
+                "gap": 29,
+                "magType": "mw",
+                "type": "earthquake",
+                "title": "M 3.6 - 2km W of Concord, CA"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -122.0406667,
+                    37.9708333,
+                    15.24
+                ]
+            },
+            "id": "nc73510910"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 6.2,
+                "place": "32 km S of Mamuju, Indonesia",
+                "time": 1610648898081,
+                "updated": 1611695887234,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000d030",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000d030.geojson",
+                "felt": 13,
+                "cdi": 8.8,
+                "mmi": 7.034,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 0,
+                "sig": 600,
+                "net": "us",
+                "code": "7000d030",
+                "ids": ",us7000d030,",
+                "sources": ",us,",
+                "types": ",dyfi,general-text,ground-failure,impact-text,losspager,moment-tensor,origin,phase-data,shakemap,significance,",
+                "nst": null,
+                "dmin": 2.204,
+                "rms": 1.12,
+                "gap": 28,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 6.2 - 32 km S of Mamuju, Indonesia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    118.8893,
+                    -2.9711,
+                    18
+                ]
+            },
+            "id": "us7000d030"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 6.7,
+                "place": "30 km SSW of Turt, Mongolia",
+                "time": 1610400779020,
+                "updated": 1611462919831,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000d7ix",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000d7ix.geojson",
+                "felt": 174,
+                "cdi": 8.2,
+                "mmi": 7.989,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 0,
+                "sig": 833,
+                "net": "us",
+                "code": "6000d7ix",
+                "ids": ",us6000d7ix,",
+                "sources": ",us,",
+                "types": ",dyfi,finite-fault,ground-failure,losspager,moment-tensor,origin,phase-data,shakemap,",
+                "nst": null,
+                "dmin": 2.045,
+                "rms": 0.75,
+                "gap": 22,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 6.7 - 30 km SSW of Turt, Mongolia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    100.437,
+                    51.2774,
+                    10
+                ]
+            },
+            "id": "us6000d7ix"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 6.3,
+                "place": "Kermadec Islands, New Zealand",
+                "time": 1610065729782,
+                "updated": 1610390315726,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000d6lg",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000d6lg.geojson",
+                "felt": 2,
+                "cdi": 4.4,
+                "mmi": 3.86,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 0,
+                "sig": 611,
+                "net": "us",
+                "code": "6000d6lg",
+                "ids": ",us6000d6lg,",
+                "sources": ",us,",
+                "types": ",dyfi,losspager,moment-tensor,origin,phase-data,shakemap,",
+                "nst": null,
+                "dmin": 0.713,
+                "rms": 1.19,
+                "gap": 22,
+                "magType": "mww",
+                "type": "earthquake",
+                "title": "M 6.3 - Kermadec Islands, New Zealand"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -178.7021,
+                    -29.4779,
+                    224
+                ]
+            },
+            "id": "us6000d6lg"
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "mag": 4.32,
+                "place": "10km NW of Pinnacles, CA",
+                "time": 1609598543790,
+                "updated": 1611030445693,
+                "tz": null,
+                "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73506045",
+                "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73506045.geojson",
+                "felt": 3076,
+                "cdi": 5.6,
+                "mmi": 6.55,
+                "alert": "green",
+                "status": "reviewed",
+                "tsunami": 1,
+                "sig": 847,
+                "net": "nc",
+                "code": "73506045",
+                "ids": ",ew1609598544,at00qmba6n,nc73506045,us6000d514,",
+                "sources": ",ew,at,nc,us,",
+                "types": ",dyfi,focal-mechanism,impact-link,losspager,moment-tensor,nearby-cities,origin,phase-data,scitech-link,shake-alert,shakemap,",
+                "nst": 66,
+                "dmin": 0.08224,
+                "rms": 0.11,
+                "gap": 67,
+                "magType": "mw",
+                "type": "earthquake",
+                "title": "M 4.3 - 10km NW of Pinnacles, CA"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -121.2125,
+                    36.6085,
+                    6.32
+                ]
+            },
+            "id": "nc73506045"
+        }
+    ],
+    "bbox": [
+        -178.7021,
+        -61.825,
+        6.32,
+        127.5174,
+        51.2774,
+        224
+    ]
+}
