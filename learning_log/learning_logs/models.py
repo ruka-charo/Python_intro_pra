@@ -22,4 +22,7 @@ class Entry(models.Model):
 
     def __str__(self):
         '''モデルの文字列表現を返す。'''
-        return f'{self.text[:25]}...'
+        if len(self.text) > 25:
+            return f'{self.text[:25]}...'
+        else:
+            return f"{self.text}"
