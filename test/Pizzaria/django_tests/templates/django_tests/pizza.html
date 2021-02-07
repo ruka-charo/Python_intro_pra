@@ -1,0 +1,20 @@
+{% extends 'django_tests/base.html' %}
+
+
+{% block content %}
+
+  <p>ピザ：{{ pizza }}</p>
+
+  <p>トッピング：</p>
+  <ul>
+  {% for topping in toppings %}
+    <li>
+      <p>{{ topping.date_added|date:'Y年m月d日 H:i' }}</p>
+      <p>{{ topping.name }}</p>
+    </li>
+  {% empty %}
+    <li>このトッピングはまだ作成されていません。</li>
+  {% endfor %}
+  </ul>
+
+{% endblock content %}

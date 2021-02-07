@@ -1,0 +1,20 @@
+{% extends 'django_tests/base.html' %}
+
+
+{% block content %}
+
+  <p>ピザ一覧</p>
+
+  <ul>
+    {% for pizza in pizzas %}
+      <li>
+        <a href="{% url 'django_tests:pizza' pizza.id %}">{{ pizza }}</a>
+      </li>
+    {% empty %}
+      <li>
+        このピザはまだ作成されていません。
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
